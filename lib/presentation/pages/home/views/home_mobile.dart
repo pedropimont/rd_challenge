@@ -8,6 +8,9 @@ class _HomeMobile extends StatelessWidget {
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(),
+      body: Stack(
+        children: [],
+      ),
     );
   }
 }

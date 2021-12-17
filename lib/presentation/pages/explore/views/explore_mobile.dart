@@ -6,18 +6,27 @@ class _ExploreMobile extends StatefulWidget {
 }
 
 class _ExploreMobileState extends State<_ExploreMobile> {
-  List<User>? users;
+  List<User> users = [];
 
   bool paginating = false;
+  bool error = false;
 
   Future<void> paginate({bool mockException = false}) async {
     setState(() => paginating = true);
-    final users = await context.read<UserRepository>().fetchUsers(30);
 
-    setState(() {
-      paginating = false;
-      this.users = [...?this.users, ...users];
-    });
+    try {
+      final users = await context.read<UserRepository>().fetchUsers(
+            30,
+            mockException: true,
+          );
+
+      setState(() => this.users = [...this.users, ...users]);
+    } catch (_) {
+      setState(() => error = true);
+      showErrorSnackBar(context, 'Mocked error (50% change)');
+    } finally {
+      setState(() => paginating = false);
+    }
   }
 
   @override
@@ -26,18 +35,45 @@ class _ExploreMobileState extends State<_ExploreMobile> {
     paginate(mockException: true);
   }
 
+  Widget _buildPaginateButton() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+        onPressed: paginating ? null : paginate,
+        child: paginating
+            ? const SizedBox(
+                width: 12,
+                height: 12,
+                child: CircularProgressIndicator.adaptive(
+                  strokeWidth: 2,
+                ),
+              )
+            : const Text('More'),
+      ),
+    );
+  }
+
   Widget _buildBody() {
     final users = this.users;
 
-    if (users == null) {
-      return const Center(
-        child: CircularProgressIndicator.adaptive(),
+    if (error) {
+      return Center(
+        child: Column(
+          children: const [
+            SizedBox(height: 72),
+            Icon(
+              Icons.error_outline,
+              size: 160,
+            ),
+            Text('Mocked network error! (50% change)'),
+          ],
+        ),
       );
     }
 
     if (users.isEmpty) {
       return const Center(
-        child: Text('A 1 in two change mocked error has occurred'),
+        child: CircularProgressIndicator.adaptive(),
       );
     }
 
@@ -45,26 +81,9 @@ class _ExploreMobileState extends State<_ExploreMobile> {
       itemCount: users.length + 1,
       itemBuilder: (context, i) {
         if (i == users.length) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: paginating ? null : paginate,
-              child: paginating
-                  ? const SizedBox(
-                      width: 12,
-                      height: 12,
-                      child: CircularProgressIndicator.adaptive(
-                        strokeWidth: 2,
-                      ),
-                    )
-                  : Text('More'),
-            ),
-          );
+          return _buildPaginateButton();
         }
-
-        final user = users[i];
-
-        return ProfileTile(user: user);
+        return ProfileTile(user: users[i]);
       },
     );
   }
@@ -72,7 +91,7 @@ class _ExploreMobileState extends State<_ExploreMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Explore')),
+      appBar: AppBar(title: const Text('Explore')),
       body: _buildBody(),
     );
   }

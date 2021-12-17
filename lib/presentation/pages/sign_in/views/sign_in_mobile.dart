@@ -5,16 +5,13 @@ class _SignInMobile extends StatelessWidget {
 
   Future<void> onSignInPressed(BuildContext context) async {
     try {
-      showLoadingDialog(
-        context,
-        '2 seconds mock delay',
-      );
+      showLoadingDialog(context);
       await context.read<UserCubit>().signInAnonymously();
     } on SocketException {
       Navigator.pop(context);
       showErrorSnackBar(
         context,
-        'Mocked network error!',
+        'Mocked network error! (50% change)',
       );
     } catch (_) {
       Navigator.pop(context);

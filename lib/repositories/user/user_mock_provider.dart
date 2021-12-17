@@ -3,12 +3,11 @@ part of 'user_repository.dart';
 class _UserMockProvider implements UserRepository {
   @override
   Future<User> fetchUser({bool mockException = false}) async {
-    // Mock some response delay to see the error generator message
-    await Future.delayed(const Duration(seconds: 2));
-
     if (mockException) {
       // Mock a network error
       if (math.Random().nextBool()) {
+        // Mock some response delay to simulate API call
+        await Future.delayed(const Duration(seconds: 1));
         throw const SocketException('');
       }
     }
@@ -32,33 +31,28 @@ class _UserMockProvider implements UserRepository {
     int quantity, {
     bool mockException = false,
   }) async {
-    try {
-      // Mock some response delay to see the error generator message
-      await Future.delayed(const Duration(seconds: 2));
-
-      if (mockException) {
-        // Mock a network error
-        if (math.Random().nextBool()) {
-          throw const SocketException('');
-        }
+    if (mockException) {
+      // Mock a network error
+      if (math.Random().nextBool()) {
+        // Mock some response delay to simulate API call
+        await Future.delayed(const Duration(seconds: 1));
+        throw const SocketException('');
       }
+    }
 
-      final response = await http.get(
-        Uri.parse('https://randomuser.me/api/?results=$quantity'),
-      );
+    final response = await http.get(
+      Uri.parse('https://randomuser.me/api/?results=$quantity'),
+    );
 
-      log('(TRACE) User_fetchUser: '
-          'status: ${response.statusCode} \n body: ${response.body}');
+    log('(TRACE) User_fetchUser: '
+        'status: ${response.statusCode} \n body: ${response.body}');
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body)['results'] as List;
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body)['results'] as List;
 
-        return data.map((user) => User.fromJson(user)).toList();
-      } else {
-        throw Exception();
-      }
-    } catch (e) {
-      return const [];
+      return data.map((user) => User.fromJson(user)).toList();
+    } else {
+      throw Exception();
     }
   }
 }
