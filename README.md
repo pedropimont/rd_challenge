@@ -20,6 +20,9 @@ Dart SDK version: 2.16.0-80.1.beta (beta)
         Português e Inglês.
         Não foram traduzidas todas as telas.
 
+    Explore:
+        Pagination (carrega resultados de 15 em 15)
+
     Following:
         É possivel seguir e deixar de seguir outros usuários na tela `Explore`.
         É possível visualizá-los e interagir com eles (seguir ou deixar de seguir) na tela `Account`.
