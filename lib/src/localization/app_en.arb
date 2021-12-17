@@ -1,0 +1,6 @@
+{
+  "appTitle": "cuco_challenge",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
