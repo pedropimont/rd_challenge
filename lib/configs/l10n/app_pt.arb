@@ -1,0 +1,44 @@
+{
+  "@@last_modified": "2021-02-22T15:57:12.517241",
+  "@@locale": "pt",
+  "appTitle": "Desafio Cuco",
+  "@appTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "system": "Sistema",
+  "@system": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "light": "Claro",
+  "@light": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dark": "Escuro",
+  "@dark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "Ajustes",
+  "@settings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "themes": "Tema",
+  "@themes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "resetDefaultSettings": "Redefinir Configuração Padrão",
+  "@resetDefaultSettings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "languages": "Idiomas",
+  "@languages": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

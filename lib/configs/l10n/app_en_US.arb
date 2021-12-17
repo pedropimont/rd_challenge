@@ -1,0 +1,44 @@
+{
+  "@@last_modified": "2021-02-22T15:57:12.517241",
+  "@@locale": "en_US",
+  "appTitle": "Cuco Challenge",
+  "@appTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "system": "System",
+  "@system": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "light": "Light",
+  "@light": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dark": "Dark",
+  "@dark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "Settings",
+  "@settings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "themes": "Themes",
+  "@themes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "resetDefaultSettings": "Reset Default Settings",
+  "@resetDefaultSettings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "languages": "Languages",
+  "@languages": {
+    "type": "text",
+    "placeholders": {}
+  }
+}
