@@ -16,8 +16,8 @@ class _ExploreMobileState extends State<_ExploreMobile> {
 
     try {
       final users = await context.read<UserRepository>().fetchUsers(
-            30,
-            mockException: true,
+            15,
+            mockException: mockException,
           );
 
       setState(() => this.users = [...this.users, ...users]);
