@@ -15,7 +15,7 @@ class _HomeMobileState extends State<_HomeMobile> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         position = Point(
           MediaQuery.of(context).size.width / 2,
